@@ -1,0 +1,44 @@
+{
+	"compiler": {
+		"version": "0.8.7+commit.e28d00a7"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"Tim_kiem_nhi_phan/math.sol": "ABDKMath64x64"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"Tim_kiem_nhi_phan/math.sol": {
+			"keccak256": "0x30f83fca46a6995b9115fc81760f990eb7d53d3197a3337f8a0a2ef0544b8127",
+			"urls": [
+				"bzz-raw://0029ad9447054c2ada98f24b229d45de0c2d4110f7c633232d70c3b1387fac4a",
+				"dweb:/ipfs/QmNSVCPpfh4G9G1RX3X35ycjdCdXKqfTDN6X5vPF3GNtYJ"
+			]
+		}
+	},
+	"version": 1
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+        <script src="/config.js"></script>
+        <script src="/pt.js"></script>
+        <title>Title</title>
+    </head>
+    <body>
+        <div>
+            <button id="connect" style="display: block">
+                Connect metamask
+            </button>
+            <div>
+                <p id="account" style="display: none"></p>
+            </div>
+        </div>
+
+        <div>
+            <form>
+                <label for="message">Array:</label>
+                <input
+                    type="text"
+                    id="mess"
+                    name="mess"
+                    value="1,2,3,4,5"
+                /><br /><br />
+                <input
+                    type="number"
+                    name=""
+                    id="number"
+                    placeholder="Find number"
+                    value="1"
+                />
+            </form>
+            <button id="update">Find</button>
+            <p id="msg"></p>
+        </div>
+
+        <h1 id="result"></h1>
+
+        <script type="application/javascript">
+            if (typeof window.ethereum !== "undefined") {
+                console.log("MetaMask is installed!");
+            }
+
+            async function connectMetamask() {
+                if (typeof web3 !== "undefined") {
+                    window.web3 = new Web3(web3.currentProvider);
+                } else {
+                    console.log(
+                        "No web3? You should consider trying MetaMask!"
+                    );
+                    window.web3 = new Web3(
+                        new Web3.providers.HttpProvider("http://localhost:8545")
+                    );
+                }
+                if (window.ethereum) {
+                    await ethereum.enable();
+                }
+                let accountsOnEnable = await ethereum.request({
+                    method: "eth_requestAccounts",
+                });
+                console.log("accountsOnEnable", accountsOnEnable);
+                window.account = accountsOnEnable[0];
+
+                let x = document.getElementById("account");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                    let connect = document.getElementById("connect");
+                    connect.style.display = "block";
+                    x.innerText = "Account: " + accountsOnEnable[0];
+                } else {
+                    x.style.display = "none";
+                }
+            }
+
+            document
+                .getElementById("connect")
+                .addEventListener("click", connectMetamask);
+
+            async function getResult() {
+                let arrStr = document.getElementById("mess").value;
+                let arr = arrStr.split(",");
+                let number = document.getElementById("number").value;
+                let instance = getContractInstance(Config.Abi, Config.Address);
+                getNumber(instance, arr, number).then((result) => {
+                    document.getElementById("result").innerHTML = result
+                        ? "Tìm thấy"
+                        : "Không tìm thấy";
+                });
+            }
+
+            document
+                .getElementById("update")
+                .addEventListener("click", getResult);
+
+            async function disconnect() {
+                if (typeof window.ethereum !== "undefined") {
+                    console.log("MetaMask is installed!");
+                }
+            }
+        </script>
+    </body>
+</html>
